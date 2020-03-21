@@ -15,7 +15,7 @@ classifier = TextClassifier.load('en-sentiment')
 resarr = []
 
 # for each line in csv, predict sentiment, save sentiment in another csv
-with open('demoin.csv') as csvfile:
+with open('qmarketin500.csv') as csvfile:
   reader = csv.DictReader(csvfile)
   rowcounter = 1
   for row in reader:
