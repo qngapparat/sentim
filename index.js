@@ -15,7 +15,7 @@ function grdSchemaToMySchema(json) {
       day: d.getDate(),
       millis: d.getTime(), // use this temporarily
       // TODO daytime??
-      section: r.sectionName.toLowerCase()
+      category: r.sectionName.toLowerCase()
     }
   })
   return rs
@@ -47,15 +47,15 @@ async function fetchandstore(currPage) {
   })
   // Convert it
   const myjson = grdSchemaToMySchema(json)
-  const csvfields = ['title', 'section', 'year', 'month', 'day', 'millis']
+  const csvfields = ['title', 'category', 'year', 'month', 'day', 'millis']
   const csvvalues = myjson       
   // Append to CSV
-  writeCSV(csvfields, csvvalues, './python/demoin.csv', currPage === 1)
+  writeCSV(csvfields, csvvalues, './python/qmarketin500.csv', currPage === 1)
 }
 
 
 async function main() {
-  for(let page = 1; page < 5; page++) {
+  for(let page = 1; page < 3000; page++) {
     await fetchandstore(page)
   }
 }

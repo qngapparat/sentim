@@ -6,17 +6,15 @@ from flair.models import TextClassifier
 
 classifier = TextClassifier.load('en-sentiment')
 
-resarr = []
-
 # Write CSV header
 # Overwrite old file
-with open('demoout.csv', 'w', newline='') as csvfileout:
-  fields = ['title', 'section', 'flairscore', 'textblobscore', 'meanscore']
+with open('qmout500.csv', 'w', newline='') as csvfileout:
+  fields = ['title', 'category', 'year', 'flairscore', 'textblobscore', 'meanscore', 'month', 'day', 'millis']
   writer = csv.DictWriter(csvfileout, fieldnames=fields)
   writer.writeheader()
 
 # for each line in csv, predict sentiment, save sentiment in another csv
-with open('demoin.csv') as csvfile:
+with open('qmarketin500.csv') as csvfile:
   reader = csv.DictReader(csvfile)
   for row in reader:
     str = row['title']
@@ -56,14 +54,18 @@ with open('demoin.csv') as csvfile:
 
     analysis = {
       'title': row['title'],
-      'section': row['section'],
+      'category': row['category'],
+      'year': row['year'],
       'flairscore': flairscore,
       'textblobscore': textblobscore,
-      'meanscore': meanscore
+      'meanscore': meanscore,
+      'month': row['month'],
+      'day': row['day'],
+      'millis': row['millis']
     }
     
-    with open('demoout.csv', 'a', newline='') as csvfileout:
-      fields = ['title', 'section', 'flairscore', 'textblobscore', 'meanscore']
+    with open('qmout500.csv', 'a', newline='') as csvfileout:
+      fields = ['title', 'category', 'year', 'flairscore', 'textblobscore', 'meanscore', 'month', 'day', 'millis']
       writer = csv.DictWriter(csvfileout, fieldnames=fields)
       writer.writerow(analysis)
 
