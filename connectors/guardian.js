@@ -13,6 +13,7 @@ function authfetch(...fetchargs){
 const grd = {
   /** Does an auth'd GET to Guardian with passed query params
    * @param {*} queryObj Object with query params
+   * @param {*} [options] Eg. 'cooldown' between reqs (in s)
    * @example grd.get({ q: 'whales', date: '2020-01-01' })
    * @returns {string} Fetched JSON
    */
