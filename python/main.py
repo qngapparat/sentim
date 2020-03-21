@@ -6,13 +6,22 @@ from flair.models import TextClassifier
 
 classifier = TextClassifier.load('en-sentiment')
 
+resarr = []
+
+# Write CSV header
+# Overwrite old file
+with open('demoout.csv', 'w', newline='') as csvfileout:
+  fields = ['title', 'section', 'flairscore', 'textblobscore', 'meanscore']
+  writer = csv.DictWriter(csvfileout, fieldnames=fields)
+  writer.writeheader()
+
 # for each line in csv, predict sentiment, save sentiment in another csv
 with open('demoin.csv') as csvfile:
   reader = csv.DictReader(csvfile)
   for row in reader:
     str = row['title']
     print(str)
-    flairscore = textblobscore = 0
+    flairscore = textblobscore = meanscore = 0
 
     # Flair prediction
     try:
@@ -33,6 +42,7 @@ with open('demoin.csv') as csvfile:
     try:
       score = TextBlob(str).sentiment.polarity
       textblobscore = score
+      meanscore = (textblobscore + flairscore) / 2.0
     except Exception as e:
       print("Exception when textblob processing ", str)
       print(e)
@@ -41,7 +51,19 @@ with open('demoin.csv') as csvfile:
     print(str)
     print(flairscore)
     print(textblobscore)
+    print("Mean " , meanscore)
     print("================")
-    
 
-# print(sentence.to_dict())
+    analysis = {
+      'title': row['title'],
+      'section': row['section'],
+      'flairscore': flairscore,
+      'textblobscore': textblobscore,
+      'meanscore': meanscore
+    }
+    
+    with open('demoout.csv', 'a', newline='') as csvfileout:
+      fields = ['title', 'section', 'flairscore', 'textblobscore', 'meanscore']
+      writer = csv.DictWriter(csvfileout, fieldnames=fields)
+      writer.writerow(analysis)
+
