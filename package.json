@@ -1,0 +1,23 @@
+{
+  "name": "sentim",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qngapparat/sentim.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/qngapparat/sentim/issues"
+  },
+  "homepage": "https://github.com/qngapparat/sentim#readme",
+  "dependencies": {
+    "json2csv": "^5.0.0",
+    "node-fetch": "^2.6.0"
+  }
+}
